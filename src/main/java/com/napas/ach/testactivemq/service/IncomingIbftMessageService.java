@@ -25,7 +25,7 @@ public class IncomingIbftMessageService {
     private JmsTemplate jmsTemplate;
     
     public ResponseEntity<?> receiveMessage(IbftMessage msg) {
-        jmsTemplate.convertAndSend(ActiveMQConfiguration.CUSTOMER_QUEUE, msg);
+        jmsTemplate.convertAndSend(msg.getSenderId(), msg);
         return ResponseEntity.ok("Nhan thanh cong");
     }
 }

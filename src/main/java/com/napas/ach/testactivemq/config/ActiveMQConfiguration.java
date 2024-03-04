@@ -25,13 +25,6 @@ import org.springframework.jms.support.converter.MessageType;
 @EnableJms
 @Configuration
 public class ActiveMQConfiguration {
-
-    public static final String CUSTOMER_QUEUE = "customer_queue";
-
-    public static final String OBJECT_QUEUE = "object_queue";
-
-    public static final String TEXT_QUEUE = "text_queue";
-
     @Bean
     public JmsListenerContainerFactory<?> queueListenerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
@@ -46,25 +39,4 @@ public class ActiveMQConfiguration {
         converter.setTypeIdPropertyName("_type");
         return converter;
     }
-
-//    @Bean
-//    public BrokerService broker() throws Exception {
-//        BrokerService brokerService = new BrokerService();
-//        brokerService.addConnector("tcp://localhost:61616");
-//        brokerService.setPersistent(false);
-//        brokerService.setDestinationPolicy(policyMap());
-//        return brokerService;
-//    }
-//
-//    @Bean
-//    public PolicyMap policyMap() {
-//        PolicyMap destinationPoliciy = new PolicyMap();
-//        List<PolicyEntry> entries = new ArrayList<PolicyEntry>();
-//        PolicyEntry queueEntry = new PolicyEntry();
-//        queueEntry.setQueue(">");
-//        queueEntry.setStrictOrderDispatch(false);
-//        entries.add(queueEntry);
-//        destinationPoliciy.setPolicyEntries(entries);
-//        return destinationPoliciy;
-//    }
 }
