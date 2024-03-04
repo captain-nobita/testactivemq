@@ -33,7 +33,6 @@ fe/
 ### VS Code ###
 .vscode/
 /log/
-/config/
 /mvnw
 /mvnw.cmd
 /.mvn/
