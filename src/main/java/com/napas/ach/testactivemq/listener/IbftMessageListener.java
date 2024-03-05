@@ -6,27 +6,41 @@ package com.napas.ach.testactivemq.listener;
 
 import com.napas.ach.testactivemq.model.IbftMessage;
 import java.util.logging.Level;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jms.annotation.JmsListener;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author nguye
  */
+@Slf4j
 @Component
-public class IbftMessageListener {
-    private static final Logger log = LoggerFactory.getLogger(IbftMessageListener.class);
-
-    @JmsListener(destination = "${queue.name}")
-    public void receiveCustomer(IbftMessage customer) {
-        log.info("Received ibft message: " + customer.toString());
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException ex) {
-            java.util.logging.Logger.getLogger(IbftMessageListener.class.getName()).log(Level.SEVERE, null, ex);
+public class IbftMessageListener implements MessageListener {
+    @Override
+    public void onMessage(Message message) {
+        if (message instanceof ObjectMessage) {
+            try {
+                Destination destination = message.getJMSDestination();
+                log.info("Nhan tu queue:" + destination.toString());
+                ObjectMessage objectMessage = (ObjectMessage) message;
+                IbftMessage customer = (IbftMessage) objectMessage.getObject();
+                log.info("Received ibft message: " + customer.toString());
+                try {
+                    Thread.sleep(20000);
+                } catch (InterruptedException ex) {
+                    java.util.logging.Logger.getLogger(IbftMessageListener.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                log.info("Finish process ibft message: " + customer.toString());
+            } catch (JMSException ex) {
+                log.error(ex.getMessage());
+            }
         }
-        log.info("Finish process ibft message: " + customer.toString());
+        
+        
     }
 }

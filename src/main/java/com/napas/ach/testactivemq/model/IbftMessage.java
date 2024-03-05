@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class IbftMessage implements Serializable {
     private String senderId;
     private String content;
+    private String refId;
 
     public String getSenderId() {
         return senderId;
@@ -30,9 +31,19 @@ public class IbftMessage implements Serializable {
         this.content = content;
     }
 
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
     @Override
     public String toString() {
-        return "IbftMessage{" + "senderId=" + senderId + ", content=" + content + '}';
+        return "IbftMessage{" + "senderId=" + senderId + ", content=" + content + ", refId=" + refId + '}';
     }
+
+    
     
 }

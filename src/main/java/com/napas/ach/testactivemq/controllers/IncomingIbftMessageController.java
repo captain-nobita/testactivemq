@@ -29,7 +29,6 @@ public class IncomingIbftMessageController {
 
     @PostMapping
     public ResponseEntity<?> receiverMessage(@RequestBody IbftMessage msg) {
-        logger.info("Tiep nhan ban tin:{}", msg.toString());
         return incomingMessageService.receiveMessage(msg);
     }
 }

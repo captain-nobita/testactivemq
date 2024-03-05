@@ -3,16 +3,15 @@
 logging:
     #Đường dẫn đến file cấu hình logging
     config: ./config/logback.xml
-queue:
-    name: 970436, 970499
+queue: 10
     
 spring:
-#    activemq:
+    activemq:
 #        broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
 #        in-memory: true
 #        non-blocking-redelivery: true
-#        packages:
-#            trust-all: true
+        packages:
+            trust-all: true
 #        pool:
 #            block-if-full: true
 #            block-if-full-timeout: -1
